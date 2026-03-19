@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>高总和他的虾作品集</title>
     <style>
         * {
@@ -16,43 +16,71 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
             min-height: 100vh;
             color: #e0e0e0;
-            padding: 40px 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+            overflow-x: hidden;
         }
         
         header {
             text-align: center;
-            margin-bottom: 50px;
+            padding: 40px 20px 30px;
         }
         
         h1 {
-            font-size: 42px;
+            font-size: 36px;
             background: linear-gradient(135deg, #e74c3c, #9b59b6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .subtitle {
             color: #888;
-            font-size: 16px;
+            font-size: 14px;
         }
         
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+        .section {
+            margin-bottom: 30px;
         }
         
+        .section-title {
+            font-size: 20px;
+            color: #aaa;
+            padding: 0 20px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+        }
+        
+        /* 横向滚动容器 */
+        .scroll-container {
+            display: flex;
+            gap: 20px;
+            padding: 0 20px 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* 游戏卡片 */
         .game-card {
+            flex: 0 0 300px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             padding: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            scroll-snap-align: start;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -69,7 +97,7 @@
         }
         
         .game-card:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border-color: rgba(231, 76, 60, 0.3);
         }
@@ -80,30 +108,42 @@
         }
         
         .game-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #fff;
         }
         
+        .version-badge {
+            display: inline-block;
+            background: rgba(155, 89, 182, 0.2);
+            color: #bb8fce;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: 6px;
+        }
+        
         .game-type {
-            font-size: 13px;
+            font-size: 12px;
             color: #888;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .game-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            height: 60px;
+            overflow: hidden;
         }
         
         .game-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .tag {
@@ -117,13 +157,14 @@
         .play-btn {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             text-decoration: none;
             border-radius: 12px;
             text-align: center;
             font-weight: bold;
+            font-size: 14px;
             transition: all 0.2s;
         }
         
@@ -132,38 +173,28 @@
             box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
         }
         
-        .app-section {
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .section-title {
-            font-size: 24px;
-            color: #888;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
+        /* App 卡片 */
         .app-card {
+            flex: 0 0 280px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
             padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            scroll-snap-align: start;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
         .app-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
+            flex-shrink: 0;
         }
         
         .app-info {
@@ -171,70 +202,74 @@
         }
         
         .app-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             margin-bottom: 4px;
         }
         
         .app-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: #888;
+            margin-bottom: 8px;
         }
         
         .app-badge {
+            display: inline-block;
             font-size: 11px;
             padding: 6px 12px;
-            background: rgba(52, 152, 219, 0.2);
-            color: #5dade2;
             border-radius: 20px;
+            text-decoration: none;
         }
         
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
             color: #666;
-            font-size: 14px;
+            font-size: 12px;
         }
         
-        .version-badge {
-            display: inline-block;
-            background: rgba(155, 89, 182, 0.2);
-            color: #bb8fce;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            margin-left: 8px;
+        /* 提示箭头 */
+        .scroll-hint {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            padding: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
         }
         
         @media (max-width: 600px) {
-            h1 { font-size: 32px; }
-            .games-grid { grid-template-columns: 1fr; }
-            .app-card { flex-direction: column; text-align: center; }
+            h1 { font-size: 28px; }
+            .game-card { flex: 0 0 260px; }
+            .app-card { flex: 0 0 260px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎮 高总和他的虾</h1>
-            <p class="subtitle">作品集</p>
-        </header>
-        
-        <div class="games-grid">
+    <header>
+        <h1>🎮 高总和他的虾</h1>
+        <p class="subtitle">游戏作品集 - 左右滑动查看更多</p>
+    </header>
+    
+    <!-- H5 游戏 -->
+    <div class="section">
+        <h2 class="section-title">🌐 H5 游戏</h2>
+        <div class="scroll-container">
             <!-- 医院逃生 -->
             <div class="game-card">
                 <div class="game-icon">🏥</div>
                 <div class="game-title">医院逃生<span class="version-badge">v5.4</span></div>
                 <div class="game-type">文字冒险 · 生存 · 多结局</div>
                 <div class="game-desc">
-                    16小时生存挑战，17个NPC，40+个随机事件，5种不同结局。双资源系统（HP+SAN），完整音效和粒子特效。
+                    16小时生存挑战，17个NPC，40+个随机事件，5种不同结局。
                 </div>
                 <div class="game-tags">
                     <span class="tag">多结局</span>
                     <span class="tag">Roguelike</span>
-                    <span class="tag">音效</span>
                 </div>
                 <a href="https://gaoyingxie.github.io/hospital-escape/" class="play-btn">开始游戏</a>
             </div>
@@ -245,12 +280,11 @@
                 <div class="game-title">云养娃<span class="version-badge">v4.9</span></div>
                 <div class="game-type">养成模拟 · 策略 · 多结局</div>
                 <div class="game-desc">
-                    从出生到高考，48回合养成模拟。智商、情商、才艺、魅力、学业、自律六大属性，15种不同结局，数值平衡完善版。
+                    从出生到高考，48回合养成。六大属性，15种不同结局。
                 </div>
                 <div class="game-tags">
                     <span class="tag">养成</span>
                     <span class="tag">策略</span>
-                    <span class="tag">数值</span>
                 </div>
                 <a href="https://gaoyingxie.github.io/cloud-baby/" class="play-btn">开始游戏</a>
             </div>
@@ -261,12 +295,11 @@
                 <div class="game-title">合成大西瓜</div>
                 <div class="game-type">物理合成 · 休闲</div>
                 <div class="game-desc">
-                    11种水果从蓝莓合成到西瓜。支持手机陀螺仪体感控制，晃动手机触发物理冲击，连击系统有额外奖励。
+                    11种水果合成到西瓜。体感控制，物理引擎，连击系统。
                 </div>
                 <div class="game-tags">
                     <span class="tag">物理引擎</span>
-                    <span class="tag">体感控制</span>
-                    <span class="tag">休闲</span>
+                    <span class="tag">体感</span>
                 </div>
                 <a href="https://gaoyingxie.github.io/watermelon-game/" class="play-btn">开始游戏</a>
             </div>
@@ -277,47 +310,51 @@
                 <div class="game-title">消消乐</div>
                 <div class="game-type">消除 · 休闲</div>
                 <div class="game-desc">
-                    经典三消玩法，限时挑战模式。简洁清新的界面设计，适合碎片时间游玩。
+                    经典三消玩法，限时挑战模式。简洁清新，碎片时间游玩。
                 </div>
                 <div class="game-tags">
                     <span class="tag">三消</span>
                     <span class="tag">休闲</span>
-                    <span class="tag">闯关</span>
                 </div>
-                <a href="http://nos-jd.163yun.com/jdymusic/jdymusic/h5-games/xiaoxiaole.html" class="play-btn">开始游戏</a>
+                <a href="https://gaoyingxie.github.io/xiaoxiaole/" class="play-btn">开始游戏</a>
             </div>
         </div>
-        
-        <div class="app-section">
-            <h2 class="section-title">🤖 安卓游戏</h2>
-            
+        <div class="scroll-hint">👈 左右滑动查看更多 👉</div>
+    </div>
+    
+    <!-- Android 游戏 -->
+    <div class="section">
+        <h2 class="section-title">🤖 Android 游戏</h2>
+        <div class="scroll-container">
             <div class="app-card">
                 <div class="app-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">⚔️</div>
                 <div class="app-info">
                     <div class="app-name">水果忍者</div>
-                    <div class="app-desc">React Native 开发的经典切水果游戏</div>
+                    <div class="app-desc">React Native 经典切水果</div>
+                    <a href="https://github.com/gaoyingxie/fruit-ninja-rn/releases" class="app-badge" style="background: rgba(231, 76, 60, 0.2); color: #e74c3c;">下载 APK</a>
                 </div>
-                <a href="https://github.com/gaoyingxie/fruit-ninja-rn/releases" class="app-badge" style="text-decoration: none; background: rgba(231, 76, 60, 0.2); color: #e74c3c;">下载 APK</a>
             </div>
         </div>
-        
-        <div class="app-section">
-            <h2 class="section-title">📱 安卓应用</h2>
-            
+    </div>
+    
+    <!-- Android 应用 -->
+    <div class="section">
+        <h2 class="section-title">📱 Android 应用</h2>
+        <div class="scroll-container">
             <div class="app-card">
-                <div class="app-icon">⏱️</div>
+                <div class="app-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">⏱️</div>
                 <div class="app-info">
                     <div class="app-name">计时器</div>
-                    <div class="app-desc">React Native 开发的移动端计时器应用</div>
+                    <div class="app-desc">React Native 移动端计时器</div>
+                    <a href="https://github.com/gaoyingxie/counter-app/releases" class="app-badge" style="background: rgba(52, 152, 219, 0.2); color: #5dade2;">下载 APK</a>
                 </div>
-                <a href="https://github.com/gaoyingxie/counter-app/releases" class="app-badge" style="text-decoration: none;">下载 APK</a>
             </div>
         </div>
-        
-        <footer>
-            <p>© 2025 高总和他的虾</p>
-            <p style="margin-top: 8px; font-size: 12px;">所有游戏支持手机/电脑双端游玩</p>
-        </footer>
     </div>
+    
+    <footer>
+        <p>© 2025 高总和他的虾 🦐</p>
+        <p style="margin-top: 8px;">所有游戏支持手机/电脑双端游玩</p>
+    </footer>
 </body>
 </html>
