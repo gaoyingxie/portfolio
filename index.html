@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高总 H5 游戏作品集</title>
+    <title>高总和他的虾作品集</title>
     <style>
         * {
             margin: 0;
@@ -132,6 +132,63 @@
             box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
         }
         
+        .app-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .app-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .app-info {
+            flex: 1;
+        }
+        
+        .app-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .app-desc {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .app-badge {
+            font-size: 11px;
+            padding: 6px 12px;
+            background: rgba(52, 152, 219, 0.2);
+            color: #5dade2;
+            border-radius: 20px;
+        }
+        
         footer {
             text-align: center;
             margin-top: 60px;
@@ -154,14 +211,15 @@
         @media (max-width: 600px) {
             h1 { font-size: 32px; }
             .games-grid { grid-template-columns: 1fr; }
+            .app-card { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎮 游戏作品集</h1>
-            <p class="subtitle">H5 小游戏开发合集</p>
+            <h1>🎮 高总和他的虾</h1>
+            <p class="subtitle">作品集</p>
         </header>
         
         <div class="games-grid">
@@ -194,23 +252,7 @@
                     <span class="tag">体感控制</span>
                     <span class="tag">休闲</span>
                 </div>
-                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/watermelon-game/" class="play-btn">开始游戏</a>
-            </div>
-            
-            <!-- 水果忍者 -->
-            <div class="game-card">
-                <div class="game-icon">⚔️</div>
-                <div class="game-title">水果忍者</div>
-                <div class="game-type">切水果 · 动作</div>
-                <div class="game-desc">
-                    经典切水果玩法，切开水果避开炸弹，连击获得高分。流畅的切割手感和爆炸特效。
-                </div>
-                <div class="game-tags">
-                    <span class="tag">动作</span>
-                    <span class="tag">切水果</span>
-                    <span class="tag">经典</span>
-                </div>
-                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/fruit-ninja/" class="play-btn">开始游戏</a>
+                <a href="http://nos-jd.163yun.com/jdymusic/jdymusic/h5-games/watermelon-game/index.html" class="play-btn">开始游戏</a>
             </div>
             
             <!-- 消消乐 -->
@@ -226,12 +268,38 @@
                     <span class="tag">休闲</span>
                     <span class="tag">闯关</span>
                 </div>
-                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/xiaoxiaole.html" class="play-btn">开始游戏</a>
+                <a href="http://nos-jd.163yun.com/jdymusic/jdymusic/h5-games/xiaoxiaole.html" class="play-btn">开始游戏</a>
+            </div>
+        </div>
+        
+        <div class="app-section">
+            <h2 class="section-title">🤖 安卓游戏</h2>
+            
+            <div class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">⚔️</div>
+                <div class="app-info">
+                    <div class="app-name">水果忍者</div>
+                    <div class="app-desc">React Native 开发的经典切水果游戏</div>
+                </div>
+                <a href="https://github.com/gaoyingxie/fruit-ninja-rn/releases" class="app-badge" style="text-decoration: none; background: rgba(231, 76, 60, 0.2); color: #e74c3c;">下载 APK</a>
+            </div>
+        </div>
+        
+        <div class="app-section">
+            <h2 class="section-title">📱 安卓应用</h2>
+            
+            <div class="app-card">
+                <div class="app-icon">⏱️</div>
+                <div class="app-info">
+                    <div class="app-name">计时器</div>
+                    <div class="app-desc">React Native 开发的移动端计时器应用</div>
+                </div>
+                <a href="https://github.com/gaoyingxie/counter-app/releases" class="app-badge" style="text-decoration: none;">下载 APK</a>
             </div>
         </div>
         
         <footer>
-            <p>© 2024 高总 | H5 游戏开发</p>
+            <p>© 2024 高总和他的虾</p>
             <p style="margin-top: 8px; font-size: 12px;">所有游戏支持手机/电脑双端游玩</p>
         </footer>
     </div>
