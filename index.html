@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高总 H5 游戏作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-size: 42px;
+            background: linear-gradient(135deg, #e74c3c, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #9b59b6);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+        
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .game-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .game-type {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        
+        .game-desc {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #bbb;
+        }
+        
+        .play-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            background: rgba(155, 89, 182, 0.2);
+            color: #bb8fce;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 32px; }
+            .games-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 游戏作品集</h1>
+            <p class="subtitle">H5 小游戏开发合集</p>
+        </header>
+        
+        <div class="games-grid">
+            <!-- 医院逃生 -->
+            <div class="game-card">
+                <div class="game-icon">🏥</div>
+                <div class="game-title">医院逃生<span class="version-badge">v5.4</span></div>
+                <div class="game-type">文字冒险 · 生存 · 多结局</div>
+                <div class="game-desc">
+                    16小时生存挑战，17个NPC，40+个随机事件，5种不同结局。双资源系统（HP+SAN），完整音效和粒子特效。
+                </div>
+                <div class="game-tags">
+                    <span class="tag">多结局</span>
+                    <span class="tag">Roguelike</span>
+                    <span class="tag">音效</span>
+                </div>
+                <a href="http://nos-jd.163yun.com/jdymusic/jdymusic/h5-games/hospital-escape/index-v5.html" class="play-btn">开始游戏</a>
+            </div>
+            
+            <!-- 合成大西瓜 -->
+            <div class="game-card">
+                <div class="game-icon">🍉</div>
+                <div class="game-title">合成大西瓜</div>
+                <div class="game-type">物理合成 · 休闲</div>
+                <div class="game-desc">
+                    11种水果从蓝莓合成到西瓜。支持手机陀螺仪体感控制，晃动手机触发物理冲击，连击系统有额外奖励。
+                </div>
+                <div class="game-tags">
+                    <span class="tag">物理引擎</span>
+                    <span class="tag">体感控制</span>
+                    <span class="tag">休闲</span>
+                </div>
+                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/watermelon-game/" class="play-btn">开始游戏</a>
+            </div>
+            
+            <!-- 水果忍者 -->
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <div class="game-title">水果忍者</div>
+                <div class="game-type">切水果 · 动作</div>
+                <div class="game-desc">
+                    经典切水果玩法，切开水果避开炸弹，连击获得高分。流畅的切割手感和爆炸特效。
+                </div>
+                <div class="game-tags">
+                    <span class="tag">动作</span>
+                    <span class="tag">切水果</span>
+                    <span class="tag">经典</span>
+                </div>
+                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/fruit-ninja/" class="play-btn">开始游戏</a>
+            </div>
+            
+            <!-- 消消乐 -->
+            <div class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">消消乐</div>
+                <div class="game-type">消除 · 休闲</div>
+                <div class="game-desc">
+                    经典三消玩法，限时挑战模式。简洁清新的界面设计，适合碎片时间游玩。
+                </div>
+                <div class="game-tags">
+                    <span class="tag">三消</span>
+                    <span class="tag">休闲</span>
+                    <span class="tag">闯关</span>
+                </div>
+                <a href="http://nos-jd.163yun.com/jdymusic/h5-games/xiaoxiaole.html" class="play-btn">开始游戏</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 高总 | H5 游戏开发</p>
+            <p style="margin-top: 8px; font-size: 12px;">所有游戏支持手机/电脑双端游玩</p>
+        </footer>
+    </div>
+</body>
+</html>
