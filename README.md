@@ -10,6 +10,13 @@
 
 ## 🎮 H5 游戏
 
+### 🦞 赛博斗龙虾
+- **类型**：回合战斗 · 养成 · Roguelike
+- **特色**：自动战斗，技能偷取，装备系统，养虾/对战双模式
+- **版本**：v1.46
+- **链接**：https://gaoyingxie.github.io/cyber-cricket/
+- **仓库**：[cyber-cricket](https://github.com/gaoyingxie/cyber-cricket)
+
 ### 🏥 医院逃生 v5.4
 - **类型**：文字冒险 · 生存 · 多结局
 - **特色**：16小时生存挑战，17个NPC，40+随机事件
@@ -53,6 +60,7 @@
 
 ## 📂 项目仓库
 
+- [cyber-cricket](https://github.com/gaoyingxie/cyber-cricket) 🦞 NEW
 - [hospital-escape](https://github.com/gaoyingxie/hospital-escape)
 - [cloud-baby](https://github.com/gaoyingxie/cloud-baby)
 - [watermelon-game](https://github.com/gaoyingxie/watermelon-game)
@@ -60,7 +68,7 @@
 - [fruit-ninja-rn](https://github.com/gaoyingxie/fruit-ninja-rn)
 - [counter-app](https://github.com/gaoyingxie/counter-app)
 
-## 👨‍💻 开发者
+## 👨💻 开发者
 
 **高总和他的虾** 🦐
 
