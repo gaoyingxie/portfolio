@@ -669,5 +669,38 @@
             <p style="margin-top: 6px;">所有游戏支持手机 / 电脑双端游玩</p>
         </footer>
     </div>
+
+    <script>
+    (function() {
+        var GAMES = [
+            { id: 'hospital',   url: 'https://gaoyingxie.github.io/hospital-escape/',  pat: /v(\d+\.\d+)/,     badge: 'gc-1' },
+            { id: 'cloud',      url: 'https://gaoyingxie.github.io/cloud-baby/',       pat: /v(\d+\.\d+)/,     badge: 'gc-2' },
+            { id: 'watermelon', url: 'https://gaoyingxie.github.io/watermelon-game/', pat: null,                badge: 'gc-3', staticVer: 'v1.0' },
+            { id: 'xiaoxiaole', url: 'https://gaoyingxie.github.io/xiaoxiaole/',       pat: null,                badge: 'gc-4', staticVer: 'v1.0' },
+            { id: 'cyber',      url: 'https://gaoyingxie.github.io/cyber-cricket/',    pat: /class="version">v(\d+\.\d+)/, badge: 'gc-5' },
+        ];
+
+        function updateBadge(cssClass, ver) {
+            var card = document.querySelector('.game-card.' + cssClass);
+            if (!card) return;
+            var badge = card.querySelector('.version-badge');
+            if (badge) badge.textContent = ver;
+        }
+
+        GAMES.forEach(function(g) {
+            if (g.staticVer) {
+                updateBadge(g.badge, g.staticVer);
+                return;
+            }
+            fetch(g.url)
+                .then(function(r) { return r.text(); })
+                .then(function(t) {
+                    var m = t.match(g.pat);
+                    if (m) updateBadge(g.badge, 'v' + m[1]);
+                })
+                .catch(function() {});
+        });
+    })();
+    </script>
 </body>
 </html>
