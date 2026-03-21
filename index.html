@@ -2,344 +2,654 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高总和他的虾作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #08080c;
+            --surface: rgba(255,255,255,0.03);
+            --surface-hover: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.15);
+            --text-primary: #f0f0f5;
+            --text-secondary: #8888a0;
+            --text-muted: #55556a;
+            --accent-1: #ff6b6b;
+            --accent-2: #ffd93d;
+            --accent-3: #6bcb77;
+            --accent-4: #4d96ff;
+            --accent-5: #c77dff;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --font-sans: 'Outfit', system-ui, sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text-primary);
             min-height: 100vh;
-            color: #e0e0e0;
             overflow-x: hidden;
+            line-height: 1.6;
         }
-        
+
+        /* ── Background decoration ── */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-glow-1 { top: -200px; left: -100px; background: var(--accent-1); }
+        .bg-glow-2 { top: 40%; right: -200px; background: var(--accent-4); }
+        .bg-glow-3 { bottom: -200px; left: 30%; background: var(--accent-5); }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header ── */
         header {
+            padding: 80px 0 60px;
             text-align: center;
-            padding: 40px 20px 30px;
         }
-        
-        h1 {
-            font-size: 36px;
-            background: linear-gradient(135deg, #e74c3c, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+
+        .avatar-ring {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-5));
+            animation: spin 8s linear infinite;
         }
-        
-        .subtitle {
-            color: #888;
-            font-size: 14px;
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            color: #aaa;
-            padding: 0 20px 15px;
+
+        .avatar-ring-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg);
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            font-size: 36px;
         }
-        
-        .section-title::after {
-            content: '';
+
+        header h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #b0b0c8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header h1 span {
+            -webkit-text-fill-color: initial;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-5));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--accent-3), var(--accent-4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        /* ── Section ── */
+        .section {
+            padding: 20px 0 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-icon.h5 { background: rgba(255,107,107,0.15); }
+        .section-icon.android { background: rgba(77,150,255,0.15); }
+
+        .section-title-group {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .section-line {
             flex: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, var(--border), transparent);
         }
-        
-        /* 横向滚动容器 */
-        .scroll-container {
+
+        /* ── Cards grid ── */
+        .cards-scroll {
             display: flex;
             gap: 20px;
-            padding: 0 20px 20px;
             overflow-x: auto;
+            padding: 8px 4px 20px;
             scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            justify-content: center;
         }
-        
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* 游戏卡片 */
+        .cards-scroll::-webkit-scrollbar { display: none; }
+
+        /* ── Game Card ── */
         .game-card {
-            flex: 0 0 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            flex: 0 0 320px;
             scroll-snap-align: start;
-            transition: all 0.3s ease;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
             position: relative;
+            transition: all 0.25s ease;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        
+
         .game-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #e74c3c, #9b59b6);
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            opacity: 0;
+            transition: opacity 0.25s;
         }
-        
+
         .game-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(231, 76, 60, 0.3);
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
-        
+
+        .game-card:hover::before { opacity: 1; }
+
+        .gc-1::before { background: linear-gradient(90deg, var(--accent-1), transparent); }
+        .gc-2::before { background: linear-gradient(90deg, var(--accent-2), transparent); }
+        .gc-3::before { background: linear-gradient(90deg, var(--accent-3), transparent); }
+        .gc-4::before { background: linear-gradient(90deg, var(--accent-4), transparent); }
+        .gc-5::before { background: linear-gradient(90deg, var(--accent-5), transparent); }
+
+        .game-card:hover.gc-1 { border-color: rgba(255,107,107,0.3); }
+        .game-card:hover.gc-2 { border-color: rgba(255,217,61,0.3); }
+        .game-card:hover.gc-3 { border-color: rgba(107,203,119,0.3); }
+        .game-card:hover.gc-4 { border-color: rgba(77,150,255,0.3); }
+        .game-card:hover.gc-5 { border-color: rgba(199,125,255,0.3); }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
         .game-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 44px;
+            line-height: 1;
         }
-        
+
+        .version-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
         .game-title {
             font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #fff;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
         }
-        
-        .version-badge {
-            display: inline-block;
-            background: rgba(155, 89, 182, 0.2);
-            color: #bb8fce;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            margin-left: 6px;
-        }
-        
+
         .game-type {
             font-size: 12px;
-            color: #888;
-            margin-bottom: 10px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        
+
+        .game-type-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            display: inline-block;
+        }
+
         .game-desc {
-            font-size: 13px;
-            color: #aaa;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            height: 60px;
-            overflow: hidden;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
         }
-        
+
         .game-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
-        
+
         .tag {
             font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #bbb;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.15s;
         }
-        
+
+        .game-card:hover .tag {
+            background: rgba(255,255,255,0.08);
+        }
+
         .play-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        
-        .play-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
-        }
-        
-        /* App 卡片 */
-        .app-card {
-            flex: 0 0 280px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            scroll-snap-align: start;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background 0.2s;
+        }
+
+        .play-btn:hover::after { background: rgba(255,255,255,0.08); }
+        .play-btn:active { transform: scale(0.97); }
+
+        .gc-1 .play-btn { background: rgba(255,107,107,0.15); color: var(--accent-1); border: 1px solid rgba(255,107,107,0.2); }
+        .gc-2 .play-btn { background: rgba(255,217,61,0.12); color: var(--accent-2); border: 1px solid rgba(255,217,61,0.2); }
+        .gc-3 .play-btn { background: rgba(107,203,119,0.12); color: var(--accent-3); border: 1px solid rgba(107,203,119,0.2); }
+        .gc-4 .play-btn { background: rgba(77,150,255,0.12); color: var(--accent-4); border: 1px solid rgba(77,150,255,0.2); }
+        .gc-5 .play-btn { background: rgba(199,125,255,0.12); color: var(--accent-5); border: 1px solid rgba(199,125,255,0.2); }
+
+        .gc-1 .play-btn:hover { background: rgba(255,107,107,0.25); box-shadow: 0 8px 30px rgba(255,107,107,0.2); }
+        .gc-2 .play-btn:hover { background: rgba(255,217,61,0.22); box-shadow: 0 8px 30px rgba(255,217,61,0.15); }
+        .gc-3 .play-btn:hover { background: rgba(107,203,119,0.22); box-shadow: 0 8px 30px rgba(107,203,119,0.15); }
+        .gc-4 .play-btn:hover { background: rgba(77,150,255,0.22); box-shadow: 0 8px 30px rgba(77,150,255,0.15); }
+        .gc-5 .play-btn:hover { background: rgba(199,125,255,0.22); box-shadow: 0 8px 30px rgba(199,125,255,0.15); }
+
+        .play-arrow {
+            transition: transform 0.2s;
+        }
+        .play-btn:hover .play-arrow { transform: translateX(3px); }
+
+        /* ── App Card ── */
+        .app-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            transition: all 0.25s ease;
+        }
+
+        .app-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3);
+        }
+
+        .app-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
             flex-shrink: 0;
         }
-        
-        .app-info {
-            flex: 1;
-        }
-        
+
+        .app-info { flex: 1; }
+
         .app-name {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 4px;
         }
-        
+
         .app-desc {
             font-size: 12px;
-            color: #888;
-            margin-bottom: 8px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
         }
-        
+
         .app-badge {
-            display: inline-block;
-            font-size: 11px;
-            padding: 6px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
             border-radius: 20px;
             text-decoration: none;
+            transition: all 0.15s;
         }
-        
+
+        .app-badge:hover { transform: scale(1.05); }
+
+        .app-badge.red { background: rgba(231,76,60,0.15); color: #e74c3c; }
+        .app-badge.blue { background: rgba(52,152,219,0.15); color: #5dade2; }
+
+        /* ── Footer ── */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #666;
-            font-size: 12px;
+            padding: 50px 0 40px;
+            border-top: 1px solid var(--border);
         }
-        
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        footer .heart { color: var(--accent-1); }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header { animation: fadeInUp 0.6s ease-out; }
+        .section { animation: fadeInUp 0.6s ease-out 0.15s both; }
+        .cards-scroll { animation: fadeInUp 0.6s ease-out 0.25s both; }
+
+        /* ── Responsive ── */
         @media (max-width: 600px) {
-            h1 { font-size: 28px; }
-            .game-card { flex: 0 0 260px; }
-            .app-card { flex: 0 0 260px; }
+            header { padding: 60px 0 40px; }
+            .stats { gap: 24px; }
+            .game-card { flex: 0 0 280px; }
+            .app-card { flex: 0 0 280px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>🎮 高总和他的虾</h1>
-    </header>
-    
-    <!-- H5 游戏 -->
-    <div class="section">
-        <h2 class="section-title">🌐 H5 游戏</h2>
-        <div class="scroll-container">
-            <!-- 医院逃生 -->
-            <div class="game-card">
-                <div class="game-icon">🏥</div>
-                <div class="game-title">医院逃生<span class="version-badge">v5.4</span></div>
-                <div class="game-type">文字冒险 · 生存 · 多结局</div>
-                <div class="game-desc">
-                    16小时生存挑战，17个NPC，40+个随机事件，5种不同结局。
-                </div>
-                <div class="game-tags">
-                    <span class="tag">多结局</span>
-                    <span class="tag">Roguelike</span>
-                </div>
-                <a href="https://gaoyingxie.github.io/hospital-escape/" class="play-btn">开始游戏</a>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="container">
+        <header>
+            <div class="avatar-ring">
+                <div class="avatar-ring-inner">🦐</div>
             </div>
-            
-            <!-- 云养娃 -->
-            <div class="game-card">
-                <div class="game-icon">👶</div>
-                <div class="game-title">云养娃<span class="version-badge">v4.9</span></div>
-                <div class="game-type">养成模拟 · 策略 · 多结局</div>
-                <div class="game-desc">
-                    从出生到高考，48回合养成。六大属性，15种不同结局。
+            <h1>高总和他的<span>虾</span></h1>
+            <p class="subtitle">独立游戏开发者 · H5 &amp; Android</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">游戏作品</div>
                 </div>
-                <div class="game-tags">
-                    <span class="tag">养成</span>
-                    <span class="tag">策略</span>
+                <div class="stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">平台覆盖</div>
                 </div>
-                <a href="https://gaoyingxie.github.io/cloud-baby/" class="play-btn">开始游戏</a>
+                <div class="stat">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">好玩程度</div>
+                </div>
             </div>
-            
-            <!-- 合成大西瓜 -->
-            <div class="game-card">
-                <div class="game-icon">🍉</div>
-                <div class="game-title">合成大西瓜</div>
-                <div class="game-type">物理合成 · 休闲</div>
-                <div class="game-desc">
-                    11种水果合成到西瓜。体感控制，物理引擎，连击系统。
+        </header>
+
+        <!-- H5 游戏 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon h5">🌐</div>
+                <div class="section-title-group">
+                    <div class="section-title">H5 游戏</div>
+                    <div class="section-desc">浏览器直接玩，支持手机 / 电脑</div>
                 </div>
-                <div class="game-tags">
-                    <span class="tag">物理引擎</span>
-                    <span class="tag">体感</span>
-                </div>
-                <a href="https://gaoyingxie.github.io/watermelon-game/" class="play-btn">开始游戏</a>
+                <div class="section-line"></div>
             </div>
-            
-            <!-- 消消乐 -->
-            <div class="game-card">
-                <div class="game-icon">🎯</div>
-                <div class="game-title">消消乐</div>
-                <div class="game-type">消除 · 休闲</div>
-                <div class="game-desc">
-                    经典三消玩法，限时挑战模式。简洁清新，碎片时间游玩。
+            <div class="cards-scroll">
+                <div class="game-card gc-1">
+                    <div class="card-top">
+                        <div class="game-icon">🏥</div>
+                        <span class="version-badge">v5.4</span>
+                    </div>
+                    <div class="game-title">医院逃生</div>
+                    <div class="game-type">文字冒险<span class="game-type-dot"></span>生存<span class="game-type-dot"></span>多结局</div>
+                    <div class="game-desc">16小时生存挑战，17个NPC，40+个随机事件，5种不同结局。紧张刺激的Roguelike体验。</div>
+                    <div class="game-tags">
+                        <span class="tag">多结局</span>
+                        <span class="tag">Roguelike</span>
+                        <span class="tag">文字冒险</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/hospital-escape/" class="play-btn">
+                        开始游戏 <span class="play-arrow">→</span>
+                    </a>
                 </div>
-                <div class="game-tags">
-                    <span class="tag">三消</span>
-                    <span class="tag">休闲</span>
+
+                <div class="game-card gc-2">
+                    <div class="card-top">
+                        <div class="game-icon">👶</div>
+                        <span class="version-badge">v4.9</span>
+                    </div>
+                    <div class="game-title">云养娃</div>
+                    <div class="game-type">养成模拟<span class="game-type-dot"></span>策略<span class="game-type-dot"></span>多结局</div>
+                    <div class="game-desc">从出生到高考，48回合养成旅程。六大属性联动，15种不同结局等你探索。</div>
+                    <div class="game-tags">
+                        <span class="tag">养成</span>
+                        <span class="tag">策略</span>
+                        <span class="tag">多结局</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/cloud-baby/" class="play-btn">
+                        开始游戏 <span class="play-arrow">→</span>
+                    </a>
                 </div>
-                <a href="https://gaoyingxie.github.io/xiaoxiaole/" class="play-btn">开始游戏</a>
+
+                <div class="game-card gc-3">
+                    <div class="card-top">
+                        <div class="game-icon">🍉</div>
+                        <span class="version-badge">原版</span>
+                    </div>
+                    <div class="game-title">合成大西瓜</div>
+                    <div class="game-type">物理合成<span class="game-type-dot"></span>休闲</div>
+                    <div class="game-desc">11种水果物理碰撞，合成到西瓜。体感控制，连击系统，碎片时间首选。</div>
+                    <div class="game-tags">
+                        <span class="tag">物理引擎</span>
+                        <span class="tag">休闲</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/watermelon-game/" class="play-btn">
+                        开始游戏 <span class="play-arrow">→</span>
+                    </a>
+                </div>
+
+                <div class="game-card gc-4">
+                    <div class="card-top">
+                        <div class="game-icon">🎯</div>
+                        <span class="version-badge">原版</span>
+                    </div>
+                    <div class="game-title">消消乐</div>
+                    <div class="game-type">消除<span class="game-type-dot"></span>休闲</div>
+                    <div class="game-desc">经典三消玩法，限时挑战模式。简洁清新，碎片时间游玩的最佳选择。</div>
+                    <div class="game-tags">
+                        <span class="tag">三消</span>
+                        <span class="tag">休闲</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/xiaoxiaole/" class="play-btn">
+                        开始游戏 <span class="play-arrow">→</span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Android 游戏 -->
-    <div class="section">
-        <h2 class="section-title">🤖 Android 游戏</h2>
-        <div class="scroll-container">
-            <div class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">⚔️</div>
-                <div class="app-info">
-                    <div class="app-name">水果忍者</div>
-                    <div class="app-desc">React Native 经典切水果</div>
-                    <a href="https://github.com/gaoyingxie/fruit-ninja-rn/releases" class="app-badge" style="background: rgba(231, 76, 60, 0.2); color: #e74c3c;">下载 APK</a>
+
+        <!-- Android 游戏 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon android">🤖</div>
+                <div class="section-title-group">
+                    <div class="section-title">Android 游戏</div>
+                    <div class="section-desc">下载 APK 安装到手机</div>
+                </div>
+                <div class="section-line"></div>
+            </div>
+            <div class="cards-scroll">
+                <div class="app-card">
+                    <div class="app-icon" style="background: linear-gradient(135deg, rgba(231,76,60,0.2), rgba(192,57,43,0.2));">⚔️</div>
+                    <div class="app-info">
+                        <div class="app-name">水果忍者</div>
+                        <div class="app-desc">React Native 经典切水果</div>
+                        <a href="https://github.com/gaoyingxie/fruit-ninja-rn/releases" class="app-badge red">
+                            ↓ 下载 APK
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Android 应用 -->
-    <div class="section">
-        <h2 class="section-title">📱 Android 应用</h2>
-        <div class="scroll-container">
-            <div class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">⏱️</div>
-                <div class="app-info">
-                    <div class="app-name">计时器</div>
-                    <div class="app-desc">React Native 移动端计时器</div>
-                    <a href="https://github.com/gaoyingxie/counter-app/releases" class="app-badge" style="background: rgba(52, 152, 219, 0.2); color: #5dade2;">下载 APK</a>
+
+        <!-- Android 应用 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon android">📱</div>
+                <div class="section-title-group">
+                    <div class="section-title">Android 应用</div>
+                    <div class="section-desc">实用工具，随手可用</div>
+                </div>
+                <div class="section-line"></div>
+            </div>
+            <div class="cards-scroll">
+                <div class="app-card">
+                    <div class="app-icon" style="background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(41,128,185,0.2));">⏱️</div>
+                    <div class="app-info">
+                        <div class="app-name">计时器</div>
+                        <div class="app-desc">React Native 移动端计时器</div>
+                        <a href="https://github.com/gaoyingxie/counter-rn/releases" class="app-badge blue">
+                            ↓ 下载 APK
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <footer>
+            <p>Made with <span class="heart">❤</span> by 高总 · 2025–2026</p>
+            <p style="margin-top: 6px;">所有游戏支持手机 / 电脑双端游玩</p>
+        </footer>
     </div>
-    
-    <footer>
-        <p>© 2025 高总和他的虾 🦐</p>
-        <p style="margin-top: 8px;">所有游戏支持手机/电脑双端游玩</p>
-    </footer>
 </body>
 </html>
