@@ -695,40 +695,45 @@
                 .catch(function() {});
         });
 
-        // PC 拖动滚动：鼠标按住拖动 = 横向滚动，绕过wheel兼容性问题
+        // PC 拖动滚动：按住鼠标拖动 = 横向滚动
         document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
-            var dragging = false;
-            var startX = 0;
-            var startScrollLeft = 0;
-
+            var dragging = false, startX = 0, startScrollLeft = 0;
             scroller.addEventListener('pointerdown', function(e) {
                 if (e.pointerType === 'touch') return;
-                dragging = true;
-                startX = e.clientX;
-                startScrollLeft = scroller.scrollLeft;
+                dragging = true; startX = e.clientX; startScrollLeft = scroller.scrollLeft;
                 scroller.setPointerCapture(e.pointerId);
                 scroller.style.cursor = 'grabbing';
                 scroller.style.userSelect = 'none';
             });
-
             scroller.addEventListener('pointermove', function(e) {
                 if (!dragging) return;
-                var dx = e.clientX - startX;
-                scroller.scrollLeft = startScrollLeft - dx;
+                scroller.scrollLeft = startScrollLeft - (e.clientX - startX);
             });
-
-            scroller.addEventListener('pointerup', function(e) {
-                dragging = false;
-                scroller.style.cursor = '';
-                scroller.style.userSelect = '';
+            scroller.addEventListener('pointerup', function() {
+                dragging = false; scroller.style.cursor = ''; scroller.style.userSelect = '';
             });
-
-            scroller.addEventListener('pointercancel', function(e) {
-                dragging = false;
-                scroller.style.cursor = '';
-                scroller.style.userSelect = '';
+            scroller.addEventListener('pointercancel', function() {
+                dragging = false; scroller.style.cursor = ''; scroller.style.userSelect = '';
             });
         });
+
+        // PC wheel拦截：wheel事件只在cards区域滚动卡片
+        if (!('ontouchstart' in window)) {
+            var cards = document.querySelectorAll('.cards-scroll');
+            cards.forEach(function(sc) {
+                var h = function(e) {
+                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        sc.scrollLeft += e.deltaY;
+                    }
+                };
+                sc.addEventListener('wheel', h, { passive: false });
+                sc.querySelectorAll('*').forEach(function(el) {
+                    el.addEventListener('wheel', h, { passive: false });
+                });
+            });
+        }
     })();
     </script>
 </body>
