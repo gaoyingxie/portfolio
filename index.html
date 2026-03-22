@@ -222,6 +222,8 @@
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
         }
         .cards-scroll::-webkit-scrollbar { display: none; }
 
@@ -699,21 +701,25 @@
         // PC 滚轮横向滚动：鼠标停在卡片区域时，垂直滚轮 → 横向滚动
         var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (!isTouchDevice) {
-            var scrollHandlers = [];
-            function attachHandlers(scroller) {
-                var h = function(e) {
-                    if (Math.abs(e.deltaY) >= Math.abs(e.deltaX)) {
+            function makeWheelHandler(scroller) {
+                return function(e) {
+                    var dominated = Math.abs(e.deltaY) >= Math.abs(e.deltaX);
+                    var maxScroll = scroller.scrollWidth - scroller.offsetWidth;
+                    var atStart = scroller.scrollLeft <= 0;
+                    var atEnd = scroller.scrollLeft >= maxScroll;
+                    if (dominated && !atEnd && (e.deltaY > 0 || !atStart)) {
                         e.preventDefault();
                         scroller.scrollLeft += e.deltaY;
                     }
                 };
+            }
+            document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
+                var h = makeWheelHandler(scroller);
                 scroller.addEventListener('wheel', h, { passive: false });
                 scroller.querySelectorAll('*').forEach(function(el) {
                     el.addEventListener('wheel', h, { passive: false });
                 });
-                scrollHandlers.push({ scroller: scroller, handler: h });
-            }
-            document.querySelectorAll('.cards-scroll').forEach(attachHandlers);
+            });
         }
     })();
     </script>
