@@ -715,6 +715,19 @@
                 dragging = false; scroller.style.cursor = ''; scroller.style.userSelect = '';
             });
         });
+
+        // PC 滚轮拦截：只有可横向滚动的cards区域才拦截
+        if (!('ontouchstart' in window)) {
+            document.querySelectorAll('.cards-scroll').forEach(function(sc) {
+                if (sc.scrollWidth <= sc.offsetWidth) return;
+                sc.addEventListener('wheel', function(e) {
+                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                        e.preventDefault();
+                        sc.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+            });
+        }
     })();
     </script>
 </body>
