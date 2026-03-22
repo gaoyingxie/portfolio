@@ -219,22 +219,10 @@
             gap: 20px;
             overflow-x: auto;
             padding: 8px 4px 20px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,0.2) transparent;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        .cards-scroll::-webkit-scrollbar {
-            height: 5px;
-        }
-        .cards-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .cards-scroll::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.18);
-            border-radius: 3px;
-        }
-        .cards-scroll::-webkit-scrollbar-thumb:hover {
-            background: rgba(255,255,255,0.35);
-        }
+        .cards-scroll::-webkit-scrollbar { display: none; }
 
         /* ── Game Card ── */
         .game-card {
@@ -707,22 +695,40 @@
                 .catch(function() {});
         });
 
-        // PC 滚轮横向滚动：鼠标停在卡片区域时，垂直滚轮 → 横向滚动
-        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (!isTouchDevice) {
-            document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
-                var h = function(e) {
-                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                        e.preventDefault();
-                        scroller.scrollLeft += e.deltaY;
-                    }
-                };
-                scroller.addEventListener('wheel', h, { passive: false });
-                scroller.querySelectorAll('*').forEach(function(el) {
-                    el.addEventListener('wheel', h, { passive: false });
-                });
+        // PC 拖动滚动：鼠标按住拖动 = 横向滚动，绕过wheel兼容性问题
+        document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
+            var dragging = false;
+            var startX = 0;
+            var startScrollLeft = 0;
+
+            scroller.addEventListener('pointerdown', function(e) {
+                if (e.pointerType === 'touch') return;
+                dragging = true;
+                startX = e.clientX;
+                startScrollLeft = scroller.scrollLeft;
+                scroller.setPointerCapture(e.pointerId);
+                scroller.style.cursor = 'grabbing';
+                scroller.style.userSelect = 'none';
             });
-        }
+
+            scroller.addEventListener('pointermove', function(e) {
+                if (!dragging) return;
+                var dx = e.clientX - startX;
+                scroller.scrollLeft = startScrollLeft - dx;
+            });
+
+            scroller.addEventListener('pointerup', function(e) {
+                dragging = false;
+                scroller.style.cursor = '';
+                scroller.style.userSelect = '';
+            });
+
+            scroller.addEventListener('pointercancel', function(e) {
+                dragging = false;
+                scroller.style.cursor = '';
+                scroller.style.userSelect = '';
+            });
+        });
     })();
     </script>
 </body>
