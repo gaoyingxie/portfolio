@@ -699,10 +699,9 @@
         // PC 滚轮横向滚动：鼠标停在卡片区域时，垂直滚轮 → 横向滚动
         var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (!isTouchDevice) {
-            // 全局拦截，不用逐个监听子元素
+            // 用 capture 阶段拦截，确保在页面默认滚动处理之前执行
             document.addEventListener('wheel', function(e) {
                 var target = e.target;
-                // 找到最近的 cards-scroll 祖先
                 while (target && target !== document.body && !target.classList.contains('cards-scroll')) {
                     target = target.parentElement;
                 }
@@ -712,7 +711,7 @@
                         target.scrollLeft += e.deltaY;
                     }
                 }
-            }, { passive: false });
+            }, { passive: false, capture: true });
         }
     })();
     </script>
