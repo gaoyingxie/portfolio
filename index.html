@@ -701,7 +701,6 @@
             scroller.addEventListener('pointerdown', function(e) {
                 if (e.pointerType === 'touch') return;
                 dragging = true; startX = e.clientX; startScrollLeft = scroller.scrollLeft;
-                scroller.setPointerCapture(e.pointerId);
                 scroller.style.cursor = 'grabbing';
                 scroller.style.userSelect = 'none';
             });
@@ -716,24 +715,6 @@
                 dragging = false; scroller.style.cursor = ''; scroller.style.userSelect = '';
             });
         });
-
-        // PC wheel拦截：只有卡片可横向滚动的区域才拦截（scrollWidth > offsetWidth）
-        if (!('ontouchstart' in window)) {
-            document.querySelectorAll('.cards-scroll').forEach(function(sc) {
-                if (sc.scrollWidth <= sc.offsetWidth) return; // 只有一张卡，无需拦截
-                var h = function(e) {
-                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        sc.scrollLeft += e.deltaY;
-                    }
-                };
-                sc.addEventListener('wheel', h, { passive: false });
-                sc.querySelectorAll('*').forEach(function(el) {
-                    el.addEventListener('wheel', h, { passive: false });
-                });
-            });
-        }
     })();
     </script>
 </body>
