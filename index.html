@@ -213,6 +213,35 @@
             background: linear-gradient(90deg, var(--border), transparent);
         }
 
+        /* ── Cards area with arrows ── */
+        .cards-area {
+            position: relative;
+        }
+        .cards-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.15s, color 0.15s, opacity 0.2s;
+            user-select: none;
+            backdrop-filter: blur(8px);
+        }
+        .cards-arrow:hover { background: rgba(255,255,255,0.18); color: #fff; }
+        .cards-arrow.gone { opacity: 0; pointer-events: none; }
+        .cards-arrow.left { left: 6px; }
+        .cards-arrow.right { right: 6px; }
+
         /* ── Cards grid ── */
         .cards-scroll {
             display: flex;
@@ -525,6 +554,7 @@
                 <div class="section-line"></div>
             </div>
             <div class="cards-scroll">
+<div class="cards-arrow left gone">‹</div>
 <div class="game-card gc-5">
                     <div class="card-top">
                         <div class="game-icon">🦐</div>
@@ -608,6 +638,7 @@
                         开始游戏 <span class="play-arrow">→</span>
                     </a>
                 </div>
+<div class="cards-arrow right">›</div>
 </div>
 
         <!-- Android 游戏 -->
@@ -621,6 +652,7 @@
                 <div class="section-line"></div>
             </div>
             <div class="cards-scroll">
+<div class="cards-arrow left gone">‹</div>
                 <div class="app-card">
                     <div class="app-icon" style="background: linear-gradient(135deg, rgba(231,76,60,0.2), rgba(192,57,43,0.2));">⚔️</div>
                     <div class="app-info">
@@ -631,6 +663,7 @@
                         </a>
                     </div>
                 </div>
+<div class="cards-arrow right">›</div>
             </div>
         </div>
 
@@ -645,6 +678,7 @@
                 <div class="section-line"></div>
             </div>
             <div class="cards-scroll">
+<div class="cards-arrow left gone">‹</div>
                 <div class="app-card">
                     <div class="app-icon" style="background: linear-gradient(135deg, rgba(52,152,219,0.2), rgba(41,128,185,0.2));">⏱️</div>
                     <div class="app-info">
@@ -655,6 +689,7 @@
                         </a>
                     </div>
                 </div>
+<div class="cards-arrow right">›</div>
             </div>
         </div>
 
@@ -718,6 +753,32 @@
                 });
             });
         }
+
+        // 左右箭头按钮滚动
+        document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
+            var leftBtn = scroller.querySelector('.cards-arrow.left');
+            var rightBtn = scroller.querySelector('.cards-arrow.right');
+            if (!leftBtn || !rightBtn) return;
+
+            function updateArrows() {
+                var maxScroll = scroller.scrollWidth - scroller.offsetWidth;
+                var atStart = scroller.scrollLeft <= 0;
+                var atEnd = scroller.scrollLeft >= maxScroll - 1;
+                leftBtn.classList.toggle('gone', atStart);
+                rightBtn.classList.toggle('gone', atEnd);
+            }
+
+            leftBtn.addEventListener('click', function() {
+                scroller.scrollLeft -= 340;
+                updateArrows();
+            });
+            rightBtn.addEventListener('click', function() {
+                scroller.scrollLeft += 340;
+                updateArrows();
+            });
+            scroller.addEventListener('scroll', updateArrows, { passive: true });
+            updateArrows();
+        });
     })();
     </script>
 </body>
