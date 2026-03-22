@@ -717,10 +717,10 @@
             });
         });
 
-        // PC wheel拦截：wheel事件只在cards区域滚动卡片
+        // PC wheel拦截：只有卡片可横向滚动的区域才拦截（scrollWidth > offsetWidth）
         if (!('ontouchstart' in window)) {
-            var cards = document.querySelectorAll('.cards-scroll');
-            cards.forEach(function(sc) {
+            document.querySelectorAll('.cards-scroll').forEach(function(sc) {
+                if (sc.scrollWidth <= sc.offsetWidth) return; // 只有一张卡，无需拦截
                 var h = function(e) {
                     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                         e.preventDefault();
