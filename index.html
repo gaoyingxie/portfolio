@@ -218,12 +218,10 @@
             display: flex;
             gap: 20px;
             overflow-x: auto;
-            overflow-y: hidden;
             padding: 8px 4px 20px;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            overscroll-behavior: contain;
         }
         .cards-scroll::-webkit-scrollbar { display: none; }
 
@@ -701,12 +699,12 @@
         // PC 滚轮横向滚动：鼠标停在卡片区域时，垂直滚轮 → 横向滚动
         var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (!isTouchDevice) {
-            // 监听 cards-scroll 上的 wheel 事件（capture阶段，确保先于页面默认处理）
             document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
                 scroller.addEventListener('wheel', function(e) {
+                    // 垂直滚动才拦截，转为横向
                     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                         e.preventDefault();
-                        e.stopPropagation(); // 显式阻止冒泡
+                        e.stopPropagation();
                         scroller.scrollLeft += e.deltaY;
                     }
                 }, { passive: false, capture: true });
