@@ -700,14 +700,18 @@
         var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (!isTouchDevice) {
             document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
-                scroller.addEventListener('wheel', function(e) {
-                    // 垂直滚动才拦截，转为横向
+                // 子元素上也加拦截（bubble阶段，cards-scroll本身也加）
+                var handler = function(e) {
                     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                         e.preventDefault();
                         e.stopPropagation();
                         scroller.scrollLeft += e.deltaY;
                     }
-                }, { passive: false, capture: true });
+                };
+                scroller.addEventListener('wheel', handler, { passive: false });
+                scroller.querySelectorAll('*').forEach(function(child) {
+                    child.addEventListener('wheel', handler, { passive: false });
+                });
             });
         }
     })();
