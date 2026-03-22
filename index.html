@@ -700,17 +700,27 @@
         var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         if (!isTouchDevice) {
             document.querySelectorAll('.cards-scroll').forEach(function(scroller) {
-                // 子元素上也加拦截（bubble阶段，cards-scroll本身也加）
-                var handler = function(e) {
+                scroller.addEventListener('mouseenter', function() {
+                    document.body.style.overflow = 'hidden';
+                });
+                scroller.addEventListener('mouseleave', function() {
+                    document.body.style.overflow = '';
+                });
+                // 拦截 cards-scroll 上的 wheel
+                scroller.addEventListener('wheel', function(e) {
                     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                         e.preventDefault();
-                        e.stopPropagation();
                         scroller.scrollLeft += e.deltaY;
                     }
-                };
-                scroller.addEventListener('wheel', handler, { passive: false });
-                scroller.querySelectorAll('*').forEach(function(child) {
-                    child.addEventListener('wheel', handler, { passive: false });
+                }, { passive: false });
+                // 子元素也拦截，防止事件被子元素消费
+                scroller.querySelectorAll('*').forEach(function(el) {
+                    el.addEventListener('wheel', function(e) {
+                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                            e.preventDefault();
+                            scroller.scrollLeft += e.deltaY;
+                        }
+                    }, { passive: false });
                 });
             });
         }
