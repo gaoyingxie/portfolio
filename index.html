@@ -190,6 +190,7 @@
 
         .section-icon.h5 { background: rgba(255,107,107,0.15); }
         .section-icon.android { background: rgba(77,150,255,0.15); }
+        .section-icon.tools { background: rgba(107,203,119,0.15); }
 
         .section-title-group {
             flex: 1;
@@ -612,10 +613,23 @@
                         开始游戏 <span class="play-arrow">→</span>
                     </a>
                 </div>
+</div>
+
+        <!-- 在线工具 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon tools">🛠️</div>
+                <div class="section-title-group">
+                    <div class="section-title">在线工具</div>
+                    <div class="section-desc">浏览器直接使用，无需下载</div>
+                </div>
+                <div class="section-line"></div>
+            </div>
+            <div class="cards-scroll">
                 <div class="game-card gc-6">
                     <div class="card-top">
                         <div class="game-icon">👶</div>
-                        <span class="version-badge">v5.2</span>
+                        <span class="version-badge">v1.0</span>
                     </div>
                     <div class="game-title">宝宝成长记录</div>
                     <div class="game-type">实用工具<span class="game-type-dot"></span>H5<span class="game-type-dot"></span>移动端</div>
@@ -629,7 +643,8 @@
                         开始使用 <span class="play-arrow">→</span>
                     </a>
                 </div>
-</div>
+            </div>
+        </div>
 
         <!-- Android 游戏 -->
         <div class="section">
@@ -693,7 +708,6 @@
             { id: 'watermelon', url: 'https://gaoyingxie.github.io/watermelon-game/', pat: null,                badge: 'gc-3', staticVer: 'v1.0' },
             { id: 'xiaoxiaole', url: 'https://gaoyingxie.github.io/xiaoxiaole/',       pat: null,                badge: 'gc-4', staticVer: 'v1.0' },
             { id: 'cyber',      url: 'https://gaoyingxie.github.io/cyber-cricket/',    pat: /class="version">v(\d+\.\d+)/, badge: 'gc-5' },
-            { id: 'baby',       url: 'https://gaoyingxie.github.io/baby-log/',         pat: null,                badge: 'gc-6', staticVer: 'v1.0' },
         ];
 
         function updateBadge(cssClass, ver) {
