@@ -262,12 +262,14 @@
         .gc-3::before { background: linear-gradient(90deg, var(--accent-3), transparent); }
         .gc-4::before { background: linear-gradient(90deg, var(--accent-4), transparent); }
         .gc-5::before { background: linear-gradient(90deg, var(--accent-5), transparent); }
+        .gc-6::before { background: linear-gradient(90deg, #ff6b9d, transparent); }
 
         .game-card:hover.gc-1 { border-color: rgba(255,107,107,0.3); }
         .game-card:hover.gc-2 { border-color: rgba(255,217,61,0.3); }
         .game-card:hover.gc-3 { border-color: rgba(107,203,119,0.3); }
         .game-card:hover.gc-4 { border-color: rgba(77,150,255,0.3); }
         .game-card:hover.gc-5 { border-color: rgba(199,125,255,0.3); }
+        .game-card:hover.gc-6 { border-color: rgba(255,107,157,0.3); }
 
         .card-top {
             display: flex;
@@ -383,6 +385,8 @@
         .gc-3 .play-btn:hover { background: rgba(107,203,119,0.22); box-shadow: 0 8px 30px rgba(107,203,119,0.15); }
         .gc-4 .play-btn:hover { background: rgba(77,150,255,0.22); box-shadow: 0 8px 30px rgba(77,150,255,0.15); }
         .gc-5 .play-btn:hover { background: rgba(199,125,255,0.22); box-shadow: 0 8px 30px rgba(199,125,255,0.15); }
+        .gc-6 .play-btn { background: rgba(255,107,157,0.12); color: #ff6b9d; border: 1px solid rgba(255,107,157,0.2); }
+        .gc-6 .play-btn:hover { background: rgba(255,107,157,0.22); box-shadow: 0 8px 30px rgba(255,107,157,0.15); }
 
         .play-arrow {
             transition: transform 0.2s;
@@ -608,6 +612,23 @@
                         开始游戏 <span class="play-arrow">→</span>
                     </a>
                 </div>
+                <div class="game-card gc-6">
+                    <div class="card-top">
+                        <div class="game-icon">👶</div>
+                        <span class="version-badge">v5.2</span>
+                    </div>
+                    <div class="game-title">宝宝成长记录</div>
+                    <div class="game-type">实用工具<span class="game-type-dot"></span>H5<span class="game-type-dot"></span>移动端</div>
+                    <div class="game-desc">记录宝宝喂养、成长数据的移动端H5应用，支持图表统计、历史查询。</div>
+                    <div class="game-tags">
+                        <span class="tag">实用工具</span>
+                        <span class="tag">H5</span>
+                        <span class="tag">移动端</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/baby-log/" class="play-btn">
+                        开始使用 <span class="play-arrow">→</span>
+                    </a>
+                </div>
 </div>
 
         <!-- Android 游戏 -->
@@ -672,6 +693,7 @@
             { id: 'watermelon', url: 'https://gaoyingxie.github.io/watermelon-game/', pat: null,                badge: 'gc-3', staticVer: 'v1.0' },
             { id: 'xiaoxiaole', url: 'https://gaoyingxie.github.io/xiaoxiaole/',       pat: null,                badge: 'gc-4', staticVer: 'v1.0' },
             { id: 'cyber',      url: 'https://gaoyingxie.github.io/cyber-cricket/',    pat: /class="version">v(\d+\.\d+)/, badge: 'gc-5' },
+            { id: 'baby',       url: 'https://gaoyingxie.github.io/baby-log/',         pat: null,                badge: 'gc-6', staticVer: 'v1.0' },
         ];
 
         function updateBadge(cssClass, ver) {
