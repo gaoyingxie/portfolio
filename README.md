@@ -1,4 +1,4 @@
-# 🎮 高总和他的虾作品集
+# 🎮 高总的AI作品集
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://gaoyingxie.github.io/portfolio/)
 
@@ -78,7 +78,7 @@
 
 ## 👨💻 开发者
 
-**高总和他的虾** 🦐
+**高总的AI作品集**
 
 ---
 

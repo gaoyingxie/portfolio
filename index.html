@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>高总和他的虾作品集</title>
+    <title>高总的AI作品集</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#08080c">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -102,6 +105,10 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes spinReverse {
+            to { transform: rotate(-360deg); }
+        }
+
         .avatar-ring-inner {
             width: 100%;
             height: 100%;
@@ -110,13 +117,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            animation: spinReverse 8s linear infinite;
+            overflow: hidden;
+        }
+
+        .avatar-ring-inner img {
+            width: 52px;
+            height: 52px;
+            display: block;
         }
 
         header h1 {
-            font-size: clamp(28px, 5vw, 48px);
+            font-size: 48px;
             font-weight: 800;
-            letter-spacing: -0.02em;
+            letter-spacing: 0;
             margin-bottom: 12px;
             background: linear-gradient(135deg, #fff 0%, #b0b0c8 100%);
             -webkit-background-clip: text;
@@ -488,6 +502,7 @@
         /* ── Responsive ── */
         @media (max-width: 600px) {
             header { padding: 60px 0 40px; }
+            header h1 { font-size: 34px; }
             .stats { gap: 24px; }
             .game-card { flex: 0 0 280px; }
             .app-card { flex: 0 0 280px; }
@@ -503,10 +518,12 @@
     <div class="container">
         <header>
             <div class="avatar-ring">
-                <div class="avatar-ring-inner">🦐</div>
+                <div class="avatar-ring-inner">
+                    <img src="favicon.svg" alt="">
+                </div>
             </div>
-            <h1>高总和他的<span>虾</span></h1>
-            <p class="subtitle">独立游戏开发者 · H5 &amp; Android</p>
+            <h1>高总的<span>AI</span>作品集</h1>
+            <p class="subtitle">AI 作品创作者 · H5 &amp; Android</p>
             <div class="stats">
                 <div class="stat">
                     <div class="stat-value">7</div>
