@@ -264,6 +264,7 @@
         .gc-4::before { background: linear-gradient(90deg, var(--accent-4), transparent); }
         .gc-5::before { background: linear-gradient(90deg, var(--accent-5), transparent); }
         .gc-6::before { background: linear-gradient(90deg, #ff6b9d, transparent); }
+        .gc-7::before { background: linear-gradient(90deg, #ff9f1c, transparent); }
 
         .game-card:hover.gc-1 { border-color: rgba(255,107,107,0.3); }
         .game-card:hover.gc-2 { border-color: rgba(255,217,61,0.3); }
@@ -271,6 +272,7 @@
         .game-card:hover.gc-4 { border-color: rgba(77,150,255,0.3); }
         .game-card:hover.gc-5 { border-color: rgba(199,125,255,0.3); }
         .game-card:hover.gc-6 { border-color: rgba(255,107,157,0.3); }
+        .game-card:hover.gc-7 { border-color: rgba(255,159,28,0.3); }
 
         .card-top {
             display: flex;
@@ -388,6 +390,8 @@
         .gc-5 .play-btn:hover { background: rgba(199,125,255,0.22); box-shadow: 0 8px 30px rgba(199,125,255,0.15); }
         .gc-6 .play-btn { background: rgba(255,107,157,0.12); color: #ff6b9d; border: 1px solid rgba(255,107,157,0.2); }
         .gc-6 .play-btn:hover { background: rgba(255,107,157,0.22); box-shadow: 0 8px 30px rgba(255,107,157,0.15); }
+        .gc-7 .play-btn { background: rgba(255,159,28,0.12); color: #ff9f1c; border: 1px solid rgba(255,159,28,0.2); }
+        .gc-7 .play-btn:hover { background: rgba(255,159,28,0.22); box-shadow: 0 8px 30px rgba(255,159,28,0.16); }
 
         .play-arrow {
             transition: transform 0.2s;
@@ -505,7 +509,7 @@
             <p class="subtitle">独立游戏开发者 · H5 &amp; Android</p>
             <div class="stats">
                 <div class="stat">
-                    <div class="stat-value">6</div>
+                    <div class="stat-value">7</div>
                     <div class="stat-label">游戏作品</div>
                 </div>
                 <div class="stat">
@@ -530,6 +534,23 @@
                 <div class="section-line"></div>
             </div>
             <div class="cards-scroll">
+<div class="game-card gc-7">
+                    <div class="card-top">
+                        <div class="game-icon">🎰</div>
+                        <span class="version-badge">v1.0</span>
+                    </div>
+                    <div class="game-title">乐透摇奖模拟器</div>
+                    <div class="game-type">物理模拟<span class="game-type-dot"></span>休闲<span class="game-type-dot"></span>H5</div>
+                    <div class="game-desc">透明七边形摇奖机，乐透球跟随转筒翻滚，从导管落入开奖区。抽一球的过程也要有仪式感。</div>
+                    <div class="game-tags">
+                        <span class="tag">Matter.js</span>
+                        <span class="tag">物理模拟</span>
+                        <span class="tag">抽奖</span>
+                    </div>
+                    <a href="https://gaoyingxie.github.io/lottery-shaker-h5/" class="play-btn">
+                        开始游戏 <span class="play-arrow">→</span>
+                    </a>
+                </div>
 <div class="game-card gc-5">
                     <div class="card-top">
                         <div class="game-icon">🦐</div>
@@ -614,6 +635,7 @@
                     </a>
                 </div>
 </div>
+        </div>
 
         <!-- 在线工具 -->
         <div class="section">
@@ -703,6 +725,7 @@
     <script>
     (function() {
         var GAMES = [
+            { id: 'lottery',    url: 'https://gaoyingxie.github.io/lottery-shaker-h5/', pat: null,                badge: 'gc-7', staticVer: 'v1.0' },
             { id: 'hospital',   url: 'https://gaoyingxie.github.io/hospital-escape/',  pat: /v(\d+\.\d+)/,     badge: 'gc-1' },
             { id: 'cloud',      url: 'https://gaoyingxie.github.io/cloud-baby/',       pat: /v(\d+\.\d+)/,     badge: 'gc-2' },
             { id: 'watermelon', url: 'https://gaoyingxie.github.io/watermelon-game/', pat: null,                badge: 'gc-3', staticVer: 'v1.0' },

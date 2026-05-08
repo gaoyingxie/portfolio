@@ -10,6 +10,13 @@
 
 ## 🎮 H5 游戏
 
+### 🎰 乐透摇奖模拟器
+- **类型**：物理模拟 · 休闲 · H5
+- **特色**：七边形摇奖机，乐透球翻滚碰撞，导管出球开奖
+- **版本**：v1.0
+- **链接**：https://gaoyingxie.github.io/lottery-shaker-h5/
+- **仓库**：[lottery-shaker-h5](https://github.com/gaoyingxie/lottery-shaker-h5)
+
 ### 🦞 赛博斗龙虾
 - **类型**：回合战斗 · 养成 · Roguelike
 - **特色**：自动战斗，技能偷取，装备系统，养虾/对战双模式
@@ -60,6 +67,7 @@
 
 ## 📂 项目仓库
 
+- [lottery-shaker-h5](https://github.com/gaoyingxie/lottery-shaker-h5) 🎰 NEW
 - [cyber-cricket](https://github.com/gaoyingxie/cyber-cricket) 🦞 NEW
 - [hospital-escape](https://github.com/gaoyingxie/hospital-escape)
 - [cloud-baby](https://github.com/gaoyingxie/cloud-baby)
